@@ -16,10 +16,27 @@ import {
   User,
   Users,
 } from "react-feather";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InstructorProfileBg, User15 } from "../../imagepath";
+import { Auth } from "aws-amplify";
 
 export default function InstructorSidebar({ activeMenu, instructorInfo }) {
+
+  const navigateTo = useNavigate();
+
+  const SignOut = async () => {
+    const confirm = window.confirm("Are you sure you want to log out?");
+    try {
+      if(confirm){
+        await Auth.signOut();
+        console.log("signing out");
+        navigateTo("/");
+      }
+    } catch (error) {
+      console.log('error signing out: ', error.message) 
+    }
+  }
+
   return (
     <div className="col-xl-3 col-lg-4 col-md-12 theiaStickySidebar">
       <div className="sideStickyBar">
@@ -126,7 +143,7 @@ export default function InstructorSidebar({ activeMenu, instructorInfo }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/" className="nav-link">
+                <Link className="nav-link" onClick={SignOut}>
                   <Power size={20} /> Sign Out
                 </Link>
               </li>

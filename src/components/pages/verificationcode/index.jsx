@@ -19,8 +19,9 @@ const VerificationCode = () => {
         try {
           await Auth.confirmSignUp(state.username, code);
           console.log("verified!");
-          navigateTo("/");
+          navigateTo("/login", {state: {cameFromRegistration: true}});
         } catch (error) {
+          alert(error.message)
           console.log("error confirming sign up", error);
         }
       };
@@ -28,8 +29,10 @@ const VerificationCode = () => {
     const resendVerificationCode = async () => {
         try {
         await Auth.resendSignUp(state.username);
+        alert("A new code has been sent!")
         console.log("code resent successfully");
         } catch (err) {
+        alert("Something went wrong, please try again!")
         console.log("error resending code: ", err);
         }
     };

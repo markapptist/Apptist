@@ -16,7 +16,7 @@ const Approuter = () => {
         <Route path="/login/verify-code" element={<VerificationCode/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/instructor-dashboard" element={<Dashboard />} />
-        <Route path="/setting-edit-profile" element={<StudentEditProfile />} />
+        <Route path="/student-edit-profile" element={<StudentEditProfile />} />
       </Routes>
     </BrowserRouter>
   );

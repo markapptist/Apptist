@@ -4,10 +4,11 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import OwlCarousel from "react-owl-carousel";
 import { LoginImg, logo, NetIcon1, NetIcon2 } from "../../imagepath";
 import FeatherIcon from "feather-icons-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import { useEffect } from "react";
 
 const Login = () => {
 
@@ -16,12 +17,23 @@ const Login = () => {
   const [password, setPassword] = useState(null);
 
   const navigateTo = useNavigate();
+  const {state} = useLocation();
+
+  useEffect(()=>{
+    if(state && state.cameFromRegistration)
+      alert("Registered, you may login now!!");
+  },[]);
 
   const loginUser = async () => {
     try {
-      const {user} = await Auth.signIn(email, password);
-      console.log(user);
-      navigateTo('/setting-edit-profile');
+      console.log("Authenticating...")
+      const user = await Auth.signIn(email, password);
+      if(user){
+        const path = user.attributes["custom:role"]=="1" ? "/instructor-dashboard" : "/student-edit-profile"
+        navigateTo(path);
+      }
+      else
+        console.log("Provide Proper Credentails!")
     } catch (err) {
       console.log('error signing in', error);
     }
