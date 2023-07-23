@@ -7,7 +7,7 @@ import StudentSideBar from "../sidebar";
 import Select from "react-select";
 
 import { StudentDashboardAPI } from "../../../api/StudentAPIs";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 
 export default function StudentEditProfile() {
   const [country, setCountry] = useState(null);

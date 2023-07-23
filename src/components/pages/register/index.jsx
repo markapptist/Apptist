@@ -22,7 +22,6 @@ const Register = (props) => {
     }
 
     const registerUser = async () => {
-      const role = isAnInstructor ? 1 : 0;
       try {
         console.log("Registering User...",{
           fullName,
@@ -36,13 +35,14 @@ const Register = (props) => {
           attributes: {
             'email': email,
             'name': fullName,
-            'custom:role': role
+            'custom:role': isAnInstructor ? "1" : "0"
           }
         });
         console.log(user);
-        navigateTo("/login/verify-code", {state: {username: email}});
-        // navigateTo("/signup/verification", {state: {username: email}})
+        navigateTo("/login/verify-code", {state: {username: email, isAnInstructor}});
       } catch (error) {
+        // alert("Apologies!! Something went wrong, Please try again!");
+        alert(error.message)
         console.log('error signing up:', error);
       }
     }

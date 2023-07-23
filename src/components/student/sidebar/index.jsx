@@ -7,10 +7,27 @@ import {
   Power,
   Trash2,
 } from "react-feather";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { ProfileBg, User11 } from "../../imagepath";
+import { Auth } from "aws-amplify";
 
 export default function StudentSideBar({ activeMenu, studentInfo }) {
+
+  const navigateTo = useNavigate();
+
+  const SignOut = async () => {
+    const confirm = window.confirm("Are you sure you want to log out?");
+    try {
+      if(confirm){
+        await Auth.signOut();
+        console.log("signing out");
+        navigateTo("/");
+      }
+    } catch (error) {
+      console.log('error signing out: ', error.message) 
+    }
+  }
+
   return (
     <div className="col-xl-3 col-md-4 theiaStickySidebar">
       <div className="settings-widget dash-profile mb-3">
@@ -73,7 +90,7 @@ export default function StudentSideBar({ activeMenu, studentInfo }) {
 
 
             <li className="nav-item">
-              <Link to="#" className="nav-link">
+              <Link to="#" className="nav-link" onClick={SignOut}>
                 <Power size={20} /> Sign Out
               </Link>
             </li>

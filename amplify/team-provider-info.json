@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-apptist-staging-63555-authRole",
+      "UnauthRoleArn": "arn:aws:iam::363006972436:role/amplify-apptist-staging-63555-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::363006972436:role/amplify-apptist-staging-63555-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-apptist-staging-63555-deployment",
+      "UnauthRoleName": "amplify-apptist-staging-63555-unauthRole",
+      "StackName": "amplify-apptist-staging-63555",
+      "StackId": "arn:aws:cloudformation:us-east-1:363006972436:stack/amplify-apptist-staging-63555/2d7328a0-2923-11ee-b8bc-0a5a82b152a9",
+      "AmplifyAppId": "d3hu2pfrt5tw0x"
+    },
+    "categories": {
+      "auth": {
+        "Apptist": {}
+      }
+    }
+  }
+}
