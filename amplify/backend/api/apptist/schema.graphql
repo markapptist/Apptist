@@ -1,4 +1,7 @@
-type Instructor @model @auth(rules: [{allow: public}]) {
+type Instructor @model @auth(rules: [
+  {allow: public, operations: [read]},
+  {allow: owner, operations: [read, create, update, delete]}
+  ]) {
   id: ID!
   username: String!
   imageUrl: String!
@@ -9,7 +12,10 @@ type Instructor @model @auth(rules: [{allow: public}]) {
   publishedCourses: [Course] @hasMany
 }
 
-type Student @model @auth(rules: [{allow: public}]) {
+type Student @model @auth(rules: [
+  {allow: public, operations: [read]},
+  {allow: owner, operations: [read, create, update, delete]}
+  ]) {
   id: ID!
   username: String!
   imageUrl: String!
@@ -18,7 +24,10 @@ type Student @model @auth(rules: [{allow: public}]) {
   reviewsProvided: [Reviews] @hasMany
 }
 
-type Course @model @auth(rules: [{allow: public}]) {
+type Course @model @auth(rules: [
+  {allow: public, operations: [read]},
+  {allow: owner, operations: [read, create, update, delete]}
+  ]) {
   id: ID!
   imageUrl: String!
   coverVideoUrl: String!
@@ -30,30 +39,44 @@ type Course @model @auth(rules: [{allow: public}]) {
   sections: [CourseSection!] @hasMany
   students: [Student] @manyToMany(relationName: "StudentCourse")
   reviews: [Reviews] @hasMany
+  tags: [Tags] @manyToMany(relationName: "CourseTag")
 }
 
-type CourseSection @model @auth(rules: [{allow: public}]) {
+type CourseSection @model @auth(rules: [
+  {allow: public, operations: [read]},
+  {allow: owner, operations: [read, create, update, delete]}
+  ]) {
   id: ID!
   title: String!
   lessons: [Lesson!] @hasMany
 }
 
-type Lesson @model @auth(rules: [{allow: public}]) {
+type Lesson @model @auth(rules: [
+  {allow: public, operations: [read]},
+  {allow: owner, operations: [read, create, update, delete]}
+  ]) {
   id: ID!
   title: String!
   videoUrl: String!
   description: String 
 }
 
-type Reviews @model @auth(rules: [{allow: public}]) {
+type Reviews @model @auth(rules: [
+  {allow: public, operations: [read]},
+  {allow: owner, operations: [read, create, update, delete]}
+  ]) {
   id: ID!
   review: String!
   rating: Float 
   user: Student @belongsTo
 }
 
-type Tags @model @auth(rules: [{allow: public}]) {
+type Tags @model @auth(rules: [
+  {allow: public, operations: [read]},
+  {allow: owner, operations: [read, create, update, delete]}
+  ]) {
   id: ID!
   title: String!
+  course: [Course!] @manyToMany(relationName: "CourseTag")
 }
  

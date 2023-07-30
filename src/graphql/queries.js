@@ -23,11 +23,13 @@ export const getInstructor = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -51,6 +53,7 @@ export const listInstructors = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -70,6 +73,7 @@ export const getStudent = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -82,11 +86,13 @@ export const getStudent = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -110,6 +116,7 @@ export const listStudents = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -138,6 +145,7 @@ export const getCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       sections {
         items {
@@ -146,6 +154,7 @@ export const getCourse = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionsId
+          owner
         }
         nextToken
       }
@@ -156,6 +165,7 @@ export const getCourse = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -168,12 +178,25 @@ export const getCourse = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
+        }
+        nextToken
+      }
+      tags {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       instructorPublishedCoursesId
+      owner
     }
   }
 `;
@@ -202,6 +225,7 @@ export const listCourses = /* GraphQL */ `
           revenueThisMonth
           createdAt
           updatedAt
+          owner
         }
         sections {
           nextToken
@@ -212,9 +236,13 @@ export const listCourses = /* GraphQL */ `
         reviews {
           nextToken
         }
+        tags {
+          nextToken
+        }
         createdAt
         updatedAt
         instructorPublishedCoursesId
+        owner
       }
       nextToken
     }
@@ -234,12 +262,14 @@ export const getCourseSection = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionLessonsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       courseSectionsId
+      owner
     }
   }
 `;
@@ -259,6 +289,7 @@ export const listCourseSections = /* GraphQL */ `
         createdAt
         updatedAt
         courseSectionsId
+        owner
       }
       nextToken
     }
@@ -274,6 +305,7 @@ export const getLesson = /* GraphQL */ `
       createdAt
       updatedAt
       courseSectionLessonsId
+      owner
     }
   }
 `;
@@ -292,6 +324,7 @@ export const listLessons = /* GraphQL */ `
         createdAt
         updatedAt
         courseSectionLessonsId
+        owner
       }
       nextToken
     }
@@ -316,11 +349,13 @@ export const getReviews = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       studentReviewsProvidedId
       courseReviewsId
+      owner
     }
   }
 `;
@@ -342,11 +377,13 @@ export const listReviews = /* GraphQL */ `
           email
           createdAt
           updatedAt
+          owner
         }
         createdAt
         updatedAt
         studentReviewsProvidedId
         courseReviewsId
+        owner
       }
       nextToken
     }
@@ -357,8 +394,20 @@ export const getTags = /* GraphQL */ `
     getTags(id: $id) {
       id
       title
+      course {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -372,8 +421,12 @@ export const listTags = /* GraphQL */ `
       items {
         id
         title
+        course {
+          nextToken
+        }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -398,6 +451,7 @@ export const getStudentCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       course {
         id
@@ -417,6 +471,7 @@ export const getStudentCourse = /* GraphQL */ `
           revenueThisMonth
           createdAt
           updatedAt
+          owner
         }
         sections {
           nextToken
@@ -427,12 +482,17 @@ export const getStudentCourse = /* GraphQL */ `
         reviews {
           nextToken
         }
+        tags {
+          nextToken
+        }
         createdAt
         updatedAt
         instructorPublishedCoursesId
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -454,6 +514,7 @@ export const listStudentCourses = /* GraphQL */ `
           email
           createdAt
           updatedAt
+          owner
         }
         course {
           id
@@ -466,9 +527,11 @@ export const listStudentCourses = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -500,6 +563,7 @@ export const studentCoursesByStudentId = /* GraphQL */ `
           email
           createdAt
           updatedAt
+          owner
         }
         course {
           id
@@ -512,9 +576,11 @@ export const studentCoursesByStudentId = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -546,6 +612,7 @@ export const studentCoursesByCourseId = /* GraphQL */ `
           email
           createdAt
           updatedAt
+          owner
         }
         course {
           id
@@ -558,9 +625,203 @@ export const studentCoursesByCourseId = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         createdAt
         updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getCourseTag = /* GraphQL */ `
+  query GetCourseTag($id: ID!) {
+    getCourseTag(id: $id) {
+      id
+      courseId
+      tagsId
+      course {
+        id
+        imageUrl
+        coverVideoUrl
+        title
+        description
+        amount
+        sales
+        instructor {
+          id
+          username
+          imageUrl
+          email
+          newStudentEnrollments
+          overallCoursesRating
+          revenueThisMonth
+          createdAt
+          updatedAt
+          owner
+        }
+        sections {
+          nextToken
+        }
+        students {
+          nextToken
+        }
+        reviews {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        instructorPublishedCoursesId
+        owner
+      }
+      tags {
+        id
+        title
+        course {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const listCourseTags = /* GraphQL */ `
+  query ListCourseTags(
+    $filter: ModelCourseTagFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCourseTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        courseId
+        tagsId
+        course {
+          id
+          imageUrl
+          coverVideoUrl
+          title
+          description
+          amount
+          sales
+          createdAt
+          updatedAt
+          instructorPublishedCoursesId
+          owner
+        }
+        tags {
+          id
+          title
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const courseTagsByCourseId = /* GraphQL */ `
+  query CourseTagsByCourseId(
+    $courseId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCourseTagFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    courseTagsByCourseId(
+      courseId: $courseId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        courseId
+        tagsId
+        course {
+          id
+          imageUrl
+          coverVideoUrl
+          title
+          description
+          amount
+          sales
+          createdAt
+          updatedAt
+          instructorPublishedCoursesId
+          owner
+        }
+        tags {
+          id
+          title
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const courseTagsByTagsId = /* GraphQL */ `
+  query CourseTagsByTagsId(
+    $tagsId: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelCourseTagFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    courseTagsByTagsId(
+      tagsId: $tagsId
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        courseId
+        tagsId
+        course {
+          id
+          imageUrl
+          coverVideoUrl
+          title
+          description
+          amount
+          sales
+          createdAt
+          updatedAt
+          instructorPublishedCoursesId
+          owner
+        }
+        tags {
+          id
+          title
+          createdAt
+          updatedAt
+          owner
+        }
+        createdAt
+        updatedAt
+        owner
       }
       nextToken
     }

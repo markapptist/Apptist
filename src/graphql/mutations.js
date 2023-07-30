@@ -26,11 +26,13 @@ export const createInstructor = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -59,11 +61,13 @@ export const updateInstructor = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -92,11 +96,13 @@ export const deleteInstructor = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -117,6 +123,7 @@ export const createStudent = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -129,11 +136,13 @@ export const createStudent = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -154,6 +163,7 @@ export const updateStudent = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -166,11 +176,13 @@ export const updateStudent = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -191,6 +203,7 @@ export const deleteStudent = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -203,11 +216,13 @@ export const deleteStudent = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -237,6 +252,7 @@ export const createCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       sections {
         items {
@@ -245,6 +261,7 @@ export const createCourse = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionsId
+          owner
         }
         nextToken
       }
@@ -255,6 +272,7 @@ export const createCourse = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -267,12 +285,25 @@ export const createCourse = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
+        }
+        nextToken
+      }
+      tags {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       instructorPublishedCoursesId
+      owner
     }
   }
 `;
@@ -302,6 +333,7 @@ export const updateCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       sections {
         items {
@@ -310,6 +342,7 @@ export const updateCourse = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionsId
+          owner
         }
         nextToken
       }
@@ -320,6 +353,7 @@ export const updateCourse = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -332,12 +366,25 @@ export const updateCourse = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
+        }
+        nextToken
+      }
+      tags {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       instructorPublishedCoursesId
+      owner
     }
   }
 `;
@@ -367,6 +414,7 @@ export const deleteCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       sections {
         items {
@@ -375,6 +423,7 @@ export const deleteCourse = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionsId
+          owner
         }
         nextToken
       }
@@ -385,6 +434,7 @@ export const deleteCourse = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -397,12 +447,25 @@ export const deleteCourse = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
+        }
+        nextToken
+      }
+      tags {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       instructorPublishedCoursesId
+      owner
     }
   }
 `;
@@ -423,12 +486,14 @@ export const createCourseSection = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionLessonsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       courseSectionsId
+      owner
     }
   }
 `;
@@ -449,12 +514,14 @@ export const updateCourseSection = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionLessonsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       courseSectionsId
+      owner
     }
   }
 `;
@@ -475,12 +542,14 @@ export const deleteCourseSection = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionLessonsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       courseSectionsId
+      owner
     }
   }
 `;
@@ -497,6 +566,7 @@ export const createLesson = /* GraphQL */ `
       createdAt
       updatedAt
       courseSectionLessonsId
+      owner
     }
   }
 `;
@@ -513,6 +583,7 @@ export const updateLesson = /* GraphQL */ `
       createdAt
       updatedAt
       courseSectionLessonsId
+      owner
     }
   }
 `;
@@ -529,6 +600,7 @@ export const deleteLesson = /* GraphQL */ `
       createdAt
       updatedAt
       courseSectionLessonsId
+      owner
     }
   }
 `;
@@ -554,11 +626,13 @@ export const createReviews = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       studentReviewsProvidedId
       courseReviewsId
+      owner
     }
   }
 `;
@@ -584,11 +658,13 @@ export const updateReviews = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       studentReviewsProvidedId
       courseReviewsId
+      owner
     }
   }
 `;
@@ -614,11 +690,13 @@ export const deleteReviews = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       studentReviewsProvidedId
       courseReviewsId
+      owner
     }
   }
 `;
@@ -630,8 +708,20 @@ export const createTags = /* GraphQL */ `
     createTags(input: $input, condition: $condition) {
       id
       title
+      course {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -643,8 +733,20 @@ export const updateTags = /* GraphQL */ `
     updateTags(input: $input, condition: $condition) {
       id
       title
+      course {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -656,8 +758,20 @@ export const deleteTags = /* GraphQL */ `
     deleteTags(input: $input, condition: $condition) {
       id
       title
+      course {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -683,6 +797,7 @@ export const createStudentCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       course {
         id
@@ -702,6 +817,7 @@ export const createStudentCourse = /* GraphQL */ `
           revenueThisMonth
           createdAt
           updatedAt
+          owner
         }
         sections {
           nextToken
@@ -712,12 +828,17 @@ export const createStudentCourse = /* GraphQL */ `
         reviews {
           nextToken
         }
+        tags {
+          nextToken
+        }
         createdAt
         updatedAt
         instructorPublishedCoursesId
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -743,6 +864,7 @@ export const updateStudentCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       course {
         id
@@ -762,6 +884,7 @@ export const updateStudentCourse = /* GraphQL */ `
           revenueThisMonth
           createdAt
           updatedAt
+          owner
         }
         sections {
           nextToken
@@ -772,12 +895,17 @@ export const updateStudentCourse = /* GraphQL */ `
         reviews {
           nextToken
         }
+        tags {
+          nextToken
+        }
         createdAt
         updatedAt
         instructorPublishedCoursesId
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -803,6 +931,7 @@ export const deleteStudentCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       course {
         id
@@ -822,6 +951,7 @@ export const deleteStudentCourse = /* GraphQL */ `
           revenueThisMonth
           createdAt
           updatedAt
+          owner
         }
         sections {
           nextToken
@@ -832,12 +962,203 @@ export const deleteStudentCourse = /* GraphQL */ `
         reviews {
           nextToken
         }
+        tags {
+          nextToken
+        }
         createdAt
         updatedAt
         instructorPublishedCoursesId
+        owner
       }
       createdAt
       updatedAt
+      owner
+    }
+  }
+`;
+export const createCourseTag = /* GraphQL */ `
+  mutation CreateCourseTag(
+    $input: CreateCourseTagInput!
+    $condition: ModelCourseTagConditionInput
+  ) {
+    createCourseTag(input: $input, condition: $condition) {
+      id
+      courseId
+      tagsId
+      course {
+        id
+        imageUrl
+        coverVideoUrl
+        title
+        description
+        amount
+        sales
+        instructor {
+          id
+          username
+          imageUrl
+          email
+          newStudentEnrollments
+          overallCoursesRating
+          revenueThisMonth
+          createdAt
+          updatedAt
+          owner
+        }
+        sections {
+          nextToken
+        }
+        students {
+          nextToken
+        }
+        reviews {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        instructorPublishedCoursesId
+        owner
+      }
+      tags {
+        id
+        title
+        course {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const updateCourseTag = /* GraphQL */ `
+  mutation UpdateCourseTag(
+    $input: UpdateCourseTagInput!
+    $condition: ModelCourseTagConditionInput
+  ) {
+    updateCourseTag(input: $input, condition: $condition) {
+      id
+      courseId
+      tagsId
+      course {
+        id
+        imageUrl
+        coverVideoUrl
+        title
+        description
+        amount
+        sales
+        instructor {
+          id
+          username
+          imageUrl
+          email
+          newStudentEnrollments
+          overallCoursesRating
+          revenueThisMonth
+          createdAt
+          updatedAt
+          owner
+        }
+        sections {
+          nextToken
+        }
+        students {
+          nextToken
+        }
+        reviews {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        instructorPublishedCoursesId
+        owner
+      }
+      tags {
+        id
+        title
+        course {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const deleteCourseTag = /* GraphQL */ `
+  mutation DeleteCourseTag(
+    $input: DeleteCourseTagInput!
+    $condition: ModelCourseTagConditionInput
+  ) {
+    deleteCourseTag(input: $input, condition: $condition) {
+      id
+      courseId
+      tagsId
+      course {
+        id
+        imageUrl
+        coverVideoUrl
+        title
+        description
+        amount
+        sales
+        instructor {
+          id
+          username
+          imageUrl
+          email
+          newStudentEnrollments
+          overallCoursesRating
+          revenueThisMonth
+          createdAt
+          updatedAt
+          owner
+        }
+        sections {
+          nextToken
+        }
+        students {
+          nextToken
+        }
+        reviews {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        instructorPublishedCoursesId
+        owner
+      }
+      tags {
+        id
+        title
+        course {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;

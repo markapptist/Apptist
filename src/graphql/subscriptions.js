@@ -4,8 +4,9 @@
 export const onCreateInstructor = /* GraphQL */ `
   subscription OnCreateInstructor(
     $filter: ModelSubscriptionInstructorFilterInput
+    $owner: String
   ) {
-    onCreateInstructor(filter: $filter) {
+    onCreateInstructor(filter: $filter, owner: $owner) {
       id
       username
       imageUrl
@@ -25,19 +26,22 @@ export const onCreateInstructor = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateInstructor = /* GraphQL */ `
   subscription OnUpdateInstructor(
     $filter: ModelSubscriptionInstructorFilterInput
+    $owner: String
   ) {
-    onUpdateInstructor(filter: $filter) {
+    onUpdateInstructor(filter: $filter, owner: $owner) {
       id
       username
       imageUrl
@@ -57,19 +61,22 @@ export const onUpdateInstructor = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteInstructor = /* GraphQL */ `
   subscription OnDeleteInstructor(
     $filter: ModelSubscriptionInstructorFilterInput
+    $owner: String
   ) {
-    onDeleteInstructor(filter: $filter) {
+    onDeleteInstructor(filter: $filter, owner: $owner) {
       id
       username
       imageUrl
@@ -89,17 +96,22 @@ export const onDeleteInstructor = /* GraphQL */ `
           createdAt
           updatedAt
           instructorPublishedCoursesId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateStudent = /* GraphQL */ `
-  subscription OnCreateStudent($filter: ModelSubscriptionStudentFilterInput) {
-    onCreateStudent(filter: $filter) {
+  subscription OnCreateStudent(
+    $filter: ModelSubscriptionStudentFilterInput
+    $owner: String
+  ) {
+    onCreateStudent(filter: $filter, owner: $owner) {
       id
       username
       imageUrl
@@ -111,6 +123,7 @@ export const onCreateStudent = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -123,17 +136,22 @@ export const onCreateStudent = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateStudent = /* GraphQL */ `
-  subscription OnUpdateStudent($filter: ModelSubscriptionStudentFilterInput) {
-    onUpdateStudent(filter: $filter) {
+  subscription OnUpdateStudent(
+    $filter: ModelSubscriptionStudentFilterInput
+    $owner: String
+  ) {
+    onUpdateStudent(filter: $filter, owner: $owner) {
       id
       username
       imageUrl
@@ -145,6 +163,7 @@ export const onUpdateStudent = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -157,17 +176,22 @@ export const onUpdateStudent = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteStudent = /* GraphQL */ `
-  subscription OnDeleteStudent($filter: ModelSubscriptionStudentFilterInput) {
-    onDeleteStudent(filter: $filter) {
+  subscription OnDeleteStudent(
+    $filter: ModelSubscriptionStudentFilterInput
+    $owner: String
+  ) {
+    onDeleteStudent(filter: $filter, owner: $owner) {
       id
       username
       imageUrl
@@ -179,6 +203,7 @@ export const onDeleteStudent = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -191,17 +216,22 @@ export const onDeleteStudent = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateCourse = /* GraphQL */ `
-  subscription OnCreateCourse($filter: ModelSubscriptionCourseFilterInput) {
-    onCreateCourse(filter: $filter) {
+  subscription OnCreateCourse(
+    $filter: ModelSubscriptionCourseFilterInput
+    $owner: String
+  ) {
+    onCreateCourse(filter: $filter, owner: $owner) {
       id
       imageUrl
       coverVideoUrl
@@ -222,6 +252,7 @@ export const onCreateCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       sections {
         items {
@@ -230,6 +261,7 @@ export const onCreateCourse = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionsId
+          owner
         }
         nextToken
       }
@@ -240,6 +272,7 @@ export const onCreateCourse = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -252,18 +285,34 @@ export const onCreateCourse = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
+        }
+        nextToken
+      }
+      tags {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       instructorPublishedCoursesId
+      owner
     }
   }
 `;
 export const onUpdateCourse = /* GraphQL */ `
-  subscription OnUpdateCourse($filter: ModelSubscriptionCourseFilterInput) {
-    onUpdateCourse(filter: $filter) {
+  subscription OnUpdateCourse(
+    $filter: ModelSubscriptionCourseFilterInput
+    $owner: String
+  ) {
+    onUpdateCourse(filter: $filter, owner: $owner) {
       id
       imageUrl
       coverVideoUrl
@@ -284,6 +333,7 @@ export const onUpdateCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       sections {
         items {
@@ -292,6 +342,7 @@ export const onUpdateCourse = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionsId
+          owner
         }
         nextToken
       }
@@ -302,6 +353,7 @@ export const onUpdateCourse = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -314,18 +366,34 @@ export const onUpdateCourse = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
+        }
+        nextToken
+      }
+      tags {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       instructorPublishedCoursesId
+      owner
     }
   }
 `;
 export const onDeleteCourse = /* GraphQL */ `
-  subscription OnDeleteCourse($filter: ModelSubscriptionCourseFilterInput) {
-    onDeleteCourse(filter: $filter) {
+  subscription OnDeleteCourse(
+    $filter: ModelSubscriptionCourseFilterInput
+    $owner: String
+  ) {
+    onDeleteCourse(filter: $filter, owner: $owner) {
       id
       imageUrl
       coverVideoUrl
@@ -346,6 +414,7 @@ export const onDeleteCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       sections {
         items {
@@ -354,6 +423,7 @@ export const onDeleteCourse = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionsId
+          owner
         }
         nextToken
       }
@@ -364,6 +434,7 @@ export const onDeleteCourse = /* GraphQL */ `
           courseId
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
@@ -376,20 +447,34 @@ export const onDeleteCourse = /* GraphQL */ `
           updatedAt
           studentReviewsProvidedId
           courseReviewsId
+          owner
+        }
+        nextToken
+      }
+      tags {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       instructorPublishedCoursesId
+      owner
     }
   }
 `;
 export const onCreateCourseSection = /* GraphQL */ `
   subscription OnCreateCourseSection(
     $filter: ModelSubscriptionCourseSectionFilterInput
+    $owner: String
   ) {
-    onCreateCourseSection(filter: $filter) {
+    onCreateCourseSection(filter: $filter, owner: $owner) {
       id
       title
       lessons {
@@ -401,20 +486,23 @@ export const onCreateCourseSection = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionLessonsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       courseSectionsId
+      owner
     }
   }
 `;
 export const onUpdateCourseSection = /* GraphQL */ `
   subscription OnUpdateCourseSection(
     $filter: ModelSubscriptionCourseSectionFilterInput
+    $owner: String
   ) {
-    onUpdateCourseSection(filter: $filter) {
+    onUpdateCourseSection(filter: $filter, owner: $owner) {
       id
       title
       lessons {
@@ -426,20 +514,23 @@ export const onUpdateCourseSection = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionLessonsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       courseSectionsId
+      owner
     }
   }
 `;
 export const onDeleteCourseSection = /* GraphQL */ `
   subscription OnDeleteCourseSection(
     $filter: ModelSubscriptionCourseSectionFilterInput
+    $owner: String
   ) {
-    onDeleteCourseSection(filter: $filter) {
+    onDeleteCourseSection(filter: $filter, owner: $owner) {
       id
       title
       lessons {
@@ -451,18 +542,23 @@ export const onDeleteCourseSection = /* GraphQL */ `
           createdAt
           updatedAt
           courseSectionLessonsId
+          owner
         }
         nextToken
       }
       createdAt
       updatedAt
       courseSectionsId
+      owner
     }
   }
 `;
 export const onCreateLesson = /* GraphQL */ `
-  subscription OnCreateLesson($filter: ModelSubscriptionLessonFilterInput) {
-    onCreateLesson(filter: $filter) {
+  subscription OnCreateLesson(
+    $filter: ModelSubscriptionLessonFilterInput
+    $owner: String
+  ) {
+    onCreateLesson(filter: $filter, owner: $owner) {
       id
       title
       videoUrl
@@ -470,12 +566,16 @@ export const onCreateLesson = /* GraphQL */ `
       createdAt
       updatedAt
       courseSectionLessonsId
+      owner
     }
   }
 `;
 export const onUpdateLesson = /* GraphQL */ `
-  subscription OnUpdateLesson($filter: ModelSubscriptionLessonFilterInput) {
-    onUpdateLesson(filter: $filter) {
+  subscription OnUpdateLesson(
+    $filter: ModelSubscriptionLessonFilterInput
+    $owner: String
+  ) {
+    onUpdateLesson(filter: $filter, owner: $owner) {
       id
       title
       videoUrl
@@ -483,12 +583,16 @@ export const onUpdateLesson = /* GraphQL */ `
       createdAt
       updatedAt
       courseSectionLessonsId
+      owner
     }
   }
 `;
 export const onDeleteLesson = /* GraphQL */ `
-  subscription OnDeleteLesson($filter: ModelSubscriptionLessonFilterInput) {
-    onDeleteLesson(filter: $filter) {
+  subscription OnDeleteLesson(
+    $filter: ModelSubscriptionLessonFilterInput
+    $owner: String
+  ) {
+    onDeleteLesson(filter: $filter, owner: $owner) {
       id
       title
       videoUrl
@@ -496,12 +600,16 @@ export const onDeleteLesson = /* GraphQL */ `
       createdAt
       updatedAt
       courseSectionLessonsId
+      owner
     }
   }
 `;
 export const onCreateReviews = /* GraphQL */ `
-  subscription OnCreateReviews($filter: ModelSubscriptionReviewsFilterInput) {
-    onCreateReviews(filter: $filter) {
+  subscription OnCreateReviews(
+    $filter: ModelSubscriptionReviewsFilterInput
+    $owner: String
+  ) {
+    onCreateReviews(filter: $filter, owner: $owner) {
       id
       review
       rating
@@ -518,17 +626,22 @@ export const onCreateReviews = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       studentReviewsProvidedId
       courseReviewsId
+      owner
     }
   }
 `;
 export const onUpdateReviews = /* GraphQL */ `
-  subscription OnUpdateReviews($filter: ModelSubscriptionReviewsFilterInput) {
-    onUpdateReviews(filter: $filter) {
+  subscription OnUpdateReviews(
+    $filter: ModelSubscriptionReviewsFilterInput
+    $owner: String
+  ) {
+    onUpdateReviews(filter: $filter, owner: $owner) {
       id
       review
       rating
@@ -545,17 +658,22 @@ export const onUpdateReviews = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       studentReviewsProvidedId
       courseReviewsId
+      owner
     }
   }
 `;
 export const onDeleteReviews = /* GraphQL */ `
-  subscription OnDeleteReviews($filter: ModelSubscriptionReviewsFilterInput) {
-    onDeleteReviews(filter: $filter) {
+  subscription OnDeleteReviews(
+    $filter: ModelSubscriptionReviewsFilterInput
+    $owner: String
+  ) {
+    onDeleteReviews(filter: $filter, owner: $owner) {
       id
       review
       rating
@@ -572,49 +690,97 @@ export const onDeleteReviews = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       createdAt
       updatedAt
       studentReviewsProvidedId
       courseReviewsId
+      owner
     }
   }
 `;
 export const onCreateTags = /* GraphQL */ `
-  subscription OnCreateTags($filter: ModelSubscriptionTagsFilterInput) {
-    onCreateTags(filter: $filter) {
+  subscription OnCreateTags(
+    $filter: ModelSubscriptionTagsFilterInput
+    $owner: String
+  ) {
+    onCreateTags(filter: $filter, owner: $owner) {
       id
       title
+      course {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateTags = /* GraphQL */ `
-  subscription OnUpdateTags($filter: ModelSubscriptionTagsFilterInput) {
-    onUpdateTags(filter: $filter) {
+  subscription OnUpdateTags(
+    $filter: ModelSubscriptionTagsFilterInput
+    $owner: String
+  ) {
+    onUpdateTags(filter: $filter, owner: $owner) {
       id
       title
+      course {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteTags = /* GraphQL */ `
-  subscription OnDeleteTags($filter: ModelSubscriptionTagsFilterInput) {
-    onDeleteTags(filter: $filter) {
+  subscription OnDeleteTags(
+    $filter: ModelSubscriptionTagsFilterInput
+    $owner: String
+  ) {
+    onDeleteTags(filter: $filter, owner: $owner) {
       id
       title
+      course {
+        items {
+          id
+          courseId
+          tagsId
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
+      }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onCreateStudentCourse = /* GraphQL */ `
   subscription OnCreateStudentCourse(
     $filter: ModelSubscriptionStudentCourseFilterInput
+    $owner: String
   ) {
-    onCreateStudentCourse(filter: $filter) {
+    onCreateStudentCourse(filter: $filter, owner: $owner) {
       id
       studentId
       courseId
@@ -631,6 +797,7 @@ export const onCreateStudentCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       course {
         id
@@ -650,6 +817,7 @@ export const onCreateStudentCourse = /* GraphQL */ `
           revenueThisMonth
           createdAt
           updatedAt
+          owner
         }
         sections {
           nextToken
@@ -660,20 +828,26 @@ export const onCreateStudentCourse = /* GraphQL */ `
         reviews {
           nextToken
         }
+        tags {
+          nextToken
+        }
         createdAt
         updatedAt
         instructorPublishedCoursesId
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateStudentCourse = /* GraphQL */ `
   subscription OnUpdateStudentCourse(
     $filter: ModelSubscriptionStudentCourseFilterInput
+    $owner: String
   ) {
-    onUpdateStudentCourse(filter: $filter) {
+    onUpdateStudentCourse(filter: $filter, owner: $owner) {
       id
       studentId
       courseId
@@ -690,6 +864,7 @@ export const onUpdateStudentCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       course {
         id
@@ -709,6 +884,7 @@ export const onUpdateStudentCourse = /* GraphQL */ `
           revenueThisMonth
           createdAt
           updatedAt
+          owner
         }
         sections {
           nextToken
@@ -719,20 +895,26 @@ export const onUpdateStudentCourse = /* GraphQL */ `
         reviews {
           nextToken
         }
+        tags {
+          nextToken
+        }
         createdAt
         updatedAt
         instructorPublishedCoursesId
+        owner
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteStudentCourse = /* GraphQL */ `
   subscription OnDeleteStudentCourse(
     $filter: ModelSubscriptionStudentCourseFilterInput
+    $owner: String
   ) {
-    onDeleteStudentCourse(filter: $filter) {
+    onDeleteStudentCourse(filter: $filter, owner: $owner) {
       id
       studentId
       courseId
@@ -749,6 +931,7 @@ export const onDeleteStudentCourse = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       course {
         id
@@ -768,6 +951,7 @@ export const onDeleteStudentCourse = /* GraphQL */ `
           revenueThisMonth
           createdAt
           updatedAt
+          owner
         }
         sections {
           nextToken
@@ -778,12 +962,203 @@ export const onDeleteStudentCourse = /* GraphQL */ `
         reviews {
           nextToken
         }
+        tags {
+          nextToken
+        }
         createdAt
         updatedAt
         instructorPublishedCoursesId
+        owner
       }
       createdAt
       updatedAt
+      owner
+    }
+  }
+`;
+export const onCreateCourseTag = /* GraphQL */ `
+  subscription OnCreateCourseTag(
+    $filter: ModelSubscriptionCourseTagFilterInput
+    $owner: String
+  ) {
+    onCreateCourseTag(filter: $filter, owner: $owner) {
+      id
+      courseId
+      tagsId
+      course {
+        id
+        imageUrl
+        coverVideoUrl
+        title
+        description
+        amount
+        sales
+        instructor {
+          id
+          username
+          imageUrl
+          email
+          newStudentEnrollments
+          overallCoursesRating
+          revenueThisMonth
+          createdAt
+          updatedAt
+          owner
+        }
+        sections {
+          nextToken
+        }
+        students {
+          nextToken
+        }
+        reviews {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        instructorPublishedCoursesId
+        owner
+      }
+      tags {
+        id
+        title
+        course {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onUpdateCourseTag = /* GraphQL */ `
+  subscription OnUpdateCourseTag(
+    $filter: ModelSubscriptionCourseTagFilterInput
+    $owner: String
+  ) {
+    onUpdateCourseTag(filter: $filter, owner: $owner) {
+      id
+      courseId
+      tagsId
+      course {
+        id
+        imageUrl
+        coverVideoUrl
+        title
+        description
+        amount
+        sales
+        instructor {
+          id
+          username
+          imageUrl
+          email
+          newStudentEnrollments
+          overallCoursesRating
+          revenueThisMonth
+          createdAt
+          updatedAt
+          owner
+        }
+        sections {
+          nextToken
+        }
+        students {
+          nextToken
+        }
+        reviews {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        instructorPublishedCoursesId
+        owner
+      }
+      tags {
+        id
+        title
+        course {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
+    }
+  }
+`;
+export const onDeleteCourseTag = /* GraphQL */ `
+  subscription OnDeleteCourseTag(
+    $filter: ModelSubscriptionCourseTagFilterInput
+    $owner: String
+  ) {
+    onDeleteCourseTag(filter: $filter, owner: $owner) {
+      id
+      courseId
+      tagsId
+      course {
+        id
+        imageUrl
+        coverVideoUrl
+        title
+        description
+        amount
+        sales
+        instructor {
+          id
+          username
+          imageUrl
+          email
+          newStudentEnrollments
+          overallCoursesRating
+          revenueThisMonth
+          createdAt
+          updatedAt
+          owner
+        }
+        sections {
+          nextToken
+        }
+        students {
+          nextToken
+        }
+        reviews {
+          nextToken
+        }
+        tags {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        instructorPublishedCoursesId
+        owner
+      }
+      tags {
+        id
+        title
+        course {
+          nextToken
+        }
+        createdAt
+        updatedAt
+        owner
+      }
+      createdAt
+      updatedAt
+      owner
     }
   }
 `;

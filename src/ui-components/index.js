@@ -13,5 +13,3 @@ export { default as LessonCreateForm } from "./LessonCreateForm";
 export { default as LessonUpdateForm } from "./LessonUpdateForm";
 export { default as ReviewsCreateForm } from "./ReviewsCreateForm";
 export { default as ReviewsUpdateForm } from "./ReviewsUpdateForm";
-export { default as TagsCreateForm } from "./TagsCreateForm";
-export { default as TagsUpdateForm } from "./TagsUpdateForm";
