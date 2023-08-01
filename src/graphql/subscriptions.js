@@ -257,6 +257,7 @@ export const onCreateCourse = /* GraphQL */ `
       sections {
         items {
           id
+          sectionNumber
           title
           createdAt
           updatedAt
@@ -338,6 +339,7 @@ export const onUpdateCourse = /* GraphQL */ `
       sections {
         items {
           id
+          sectionNumber
           title
           createdAt
           updatedAt
@@ -419,6 +421,7 @@ export const onDeleteCourse = /* GraphQL */ `
       sections {
         items {
           id
+          sectionNumber
           title
           createdAt
           updatedAt
@@ -476,6 +479,7 @@ export const onCreateCourseSection = /* GraphQL */ `
   ) {
     onCreateCourseSection(filter: $filter, owner: $owner) {
       id
+      sectionNumber
       title
       lessons {
         items {
@@ -504,6 +508,7 @@ export const onUpdateCourseSection = /* GraphQL */ `
   ) {
     onUpdateCourseSection(filter: $filter, owner: $owner) {
       id
+      sectionNumber
       title
       lessons {
         items {
@@ -532,6 +537,7 @@ export const onDeleteCourseSection = /* GraphQL */ `
   ) {
     onDeleteCourseSection(filter: $filter, owner: $owner) {
       id
+      sectionNumber
       title
       lessons {
         items {

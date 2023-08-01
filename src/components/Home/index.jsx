@@ -23,8 +23,8 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { useSpring, animated } from "react-spring";
 
-import { API } from "aws-amplify";
-import { HomePageAPI } from "../../api/NonRegisteredUsersAPIs";
+import { API, graphqlOperation } from "aws-amplify";
+import { listCourses } from "./queries";
 
 const options = [
   { label: "Category", value: "Category" },
@@ -45,8 +45,9 @@ export const Home = () => {
 
   const fetchData = async () => {
     try {
-      // const data = await API.get(HomePageAPI.apiName, HomePageAPI.path);
-      const data = {}
+      const response = await API.graphql(graphqlOperation(listCourses));
+      const data = response.data.listCourses.items; 
+      console.log(response.data.listCourses.items);
       setPageInfo(data);
     } catch (error) {
       console.log(error.response);

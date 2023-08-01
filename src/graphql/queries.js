@@ -150,6 +150,7 @@ export const getCourse = /* GraphQL */ `
       sections {
         items {
           id
+          sectionNumber
           title
           createdAt
           updatedAt
@@ -252,6 +253,7 @@ export const getCourseSection = /* GraphQL */ `
   query GetCourseSection($id: ID!) {
     getCourseSection(id: $id) {
       id
+      sectionNumber
       title
       lessons {
         items {
@@ -282,6 +284,7 @@ export const listCourseSections = /* GraphQL */ `
     listCourseSections(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        sectionNumber
         title
         lessons {
           nextToken
