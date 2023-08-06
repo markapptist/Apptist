@@ -12,8 +12,10 @@ import {
 import { InstructorHeader } from "../../instructor/header";
 import InstructorSidebar from "../sidebar";
 
-import { API } from "aws-amplify";
+import { Auth, API, graphqlOperation } from "aws-amplify";
 import { InstructorDashboardAPI } from "../../../api/InstructorAPIs";
+
+import { getInstructor } from "../../../graphql/queries";
 
 export const Dashboard = () => {
 
@@ -25,10 +27,10 @@ export const Dashboard = () => {
 
   const fetchInstructorDashboardPageData = async () => {
     try {
-      // const data = await API.get(InstructorDashboardAPI.apiName, InstructorDashboardAPI.path+" "+1);
-      // const data = await API.get("InstructorDashboardAPI", "/instructorDashboard/"+" "+1);
-      const data = {}
-      setInstructorInfo(data);
+      const user = await Auth.currentAuthenticatedUser();
+      const response = await API.graphql(graphqlOperation(getInstructor, {id: user.attributes.sub}));
+      console.log(response.data.getInstructor);
+      setInstructorInfo(response.data.getInstructor);
     } catch (error) {
       console.log(error.response);
     }
@@ -263,7 +265,7 @@ export const Dashboard = () => {
                         <div className="card-body">
                           <div className="instructor-inner">
                             <h6>REVENUE</h6>
-                            <h4 className="instructor-text-success">${"instructorInfo.revenueThisMonth"}</h4>
+                            <h4 className="instructor-text-success">${instructorInfo.revenueThisMonth}</h4>
                             <p>Earning this month</p>
                           </div>
                         </div>
@@ -274,7 +276,7 @@ export const Dashboard = () => {
                         <div className="card-body">
                           <div className="instructor-inner">
                             <h6>STUDENTS ENROLLMENTS</h6>
-                            <h4 className="instructor-text-info">{"instructorInfo.newStudentEnrollments"}</h4>
+                            <h4 className="instructor-text-info">{instructorInfo.newStudentEnrollments}</h4>
                             <p>New this month</p>
                           </div>
                         </div>
@@ -285,7 +287,7 @@ export const Dashboard = () => {
                         <div className="card-body">
                           <div className="instructor-inner">
                             <h6>COURSES RATING</h6>
-                            <h4 className="instructor-text-warning">{"instructorInfo.overallCoursesRating"}</h4>
+                            <h4 className="instructor-text-warning">{instructorInfo.overallCoursesRating}</h4>
                             <p>Rating this month</p>
                           </div>
                         </div>
@@ -312,112 +314,37 @@ export const Dashboard = () => {
                                 </thead>
                                 <tbody>
                                   {
-                                    // instructorInfo.publishedCourses.map((course, index) => {
-                                    //   return (
-                                    //     <tr key={index}>
-                                    //       <td>
-                                    //         <div className="sell-table-group d-flex align-items-center">
-                                    //           <div className="sell-group-img">
-                                    //             <Link to="course-details">
-                                    //               <img
-                                    //                 src={course.courseTitleImageURL}
-                                    //                 className="img-fluid "
-                                    //                 alt=""
-                                    //               />
-                                    //             </Link>
-                                    //           </div>
-                                    //           <div className="sell-tabel-info">
-                                    //             <p>
-                                    //               <Link to="course-details">
-                                    //                 {course.courseTitle}
-                                    //               </Link>
-                                    //             </p>
-                                    //           </div>
-                                    //         </div>
-                                    //       </td>
-                                    //       <td>{course.courseSales}</td>
-                                    //       <td>${course.courseAmount}</td>
-                                    //     </tr>
-                                    //   );
-                                    // })
+                                    instructorInfo.publishedCourses.items.map((course, index) => {
+                                      return (
+                                        <tr key={index}>
+                                          <td>
+                                            <div className="sell-table-group d-flex align-items-center">
+                                              <div className="sell-group-img">
+                                                <Link to="course-details">
+                                                  <img
+                                                    src={course.imageUrl}
+                                                    className="img-fluid "
+                                                    alt=""
+                                                  />
+                                                </Link>
+                                              </div>
+                                              <div className="sell-tabel-info">
+                                                <p>
+                                                  <Link to="course-details">
+                                                    {course.title}
+                                                  </Link>
+                                                </p>
+                                              </div>
+                                            </div>
+                                          </td>
+                                          <td>{course.sales}</td>
+                                          <td>${course.amount}</td>
+                                        </tr>
+                                      );
+                                    })
                                   }
-                                  {/* <tr>
-                                    <td>
-                                      <div className="sell-table-group d-flex align-items-center">
-                                        <div className="sell-group-img">
-                                          <Link to="course-details">
-                                            <img
-                                              src={Course10}
-                                              className="img-fluid "
-                                              alt=""
-                                            />
-                                          </Link>
-                                        </div>
-                                        <div className="sell-tabel-info">
-                                          <p>
-                                            <Link to="course-details">
-                                              Information About UI/UX Design Degree
-                                            </Link>
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </td>
-                                    <td>34</td>
-                                    <td>$3,145.23</td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <div className="sell-table-group d-flex align-items-center">
-                                        <div className="sell-group-img">
-                                          <Link to="course-details">
-                                            <img
-                                              src={Course11}
-                                              className="img-fluid "
-                                              alt=""
-                                            />
-                                          </Link>
-                                        </div>
-                                        <div className="sell-tabel-info">
-                                          <p>
-                                            <Link to="course-details">
-                                              Wordpress for Beginners - Master
-                                              Wordpress Quickly
-                                            </Link>
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </td>
-                                    <td>34</td>
-                                    <td>$3,145.23</td>
-                                  </tr>
-                                  <tr>
-                                    <td>
-                                      <div className="sell-table-group d-flex align-items-center">
-                                        <div className="sell-group-img">
-                                          <Link to="course-details">
-                                            <img
-                                              src={Course12}
-                                              className="img-fluid "
-                                              alt=""
-                                            />
-                                          </Link>
-                                        </div>
-                                        <div className="sell-tabel-info">
-                                          <p>
-                                            <Link to="course-details">
-                                              Sketch from A to Z (2022): Become an
-                                              app designer
-                                            </Link>
-                                          </p>
-                                        </div>
-                                      </div>
-                                    </td>
-                                    <td>34</td>
-                                    <td>$3,145.23</td>
-                                  </tr> */}
                                 </tbody>
                               </table>
-                              {/* Referred Users */}
                             </div>
                           </div>
                         </div>
@@ -425,8 +352,6 @@ export const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                {/* Instructor Dashboard */}
-
                 <Footer />
               </div>
             </div>

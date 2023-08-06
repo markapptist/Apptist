@@ -70,228 +70,25 @@ const TopCategory = ({ courseList }) => {
           margin={10}
           nav
         >
-         
-          {/* {
-            courseList.map((course, index) => {
-              return (
-                <div className="feature-box text-center " key={index}>
-                  <div className="feature-bg">
-                    <div className="feature-header">
-                      <div className="feature-icon">
-                      <div>
-                        <img src={course.courseImage} alt="" />
-                      </div>
-                      <div className="feature-cont">
-                        <div className="feature-text">{course.courseTitle}</div>
-                      </div>
+        {
+          courseList.map((course, index) => {
+            return (
+              <div className="feature-box text-center " key={index} style={{width: "100%", height: "100%", overflow: "hidden"}}>
+                <div  style={{width: "100%", height: "100%", overflow: "hidden"}}>
+                    <img src={course.imageUrl} alt="" />
+                </div>
+                  <div className="feature-header" style={{width: "100%", height: "100%"}}>
+                    <div className="feature-cont">
+                      <div className="feature-text">{course.title}</div>
                     </div>
-                    <p>{course.instructorName}</p>
                   </div>
-                </div>
-              );
-            })
-          } */}
-          
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Angular Development</div>
-                </div>
+                  <p>{course.instructor.username}</p>
               </div>
-              <p>40 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon1} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Docker Development</div>
-                </div>
-              </div>
-              <p>45 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon2} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Node JS Frontend</div>
-                </div>
-              </div>
-              <p>40 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon3} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Swift Development</div>
-                </div>
-              </div>
-              <p>23 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon4} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Python Development</div>
-                </div>
-              </div>
-              <p>30 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon5} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">
-                    React
-                    <br /> Native
-                  </div>
-                </div>
-              </div>
-              <p>80 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon4} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Angular Development</div>
-                </div>
-              </div>
-              <p>40 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon1} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Docker Development</div>
-                </div>
-              </div>
-              <p>45 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon2} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Node JS Frontend</div>
-                </div>
-              </div>
-              <p>40 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon3} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Swift Development</div>
-                </div>
-              </div>
-              <p>23 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon4} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Python Development</div>
-                </div>
-              </div>
-              <p>30 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon1} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Docker Development</div>
-                </div>
-              </div>
-              <p>45 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon2} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Node JS Frontend</div>
-                </div>
-              </div>
-              <p>40 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon3} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Swift Development</div>
-                </div>
-              </div>
-              <p>23 Instructors</p>
-            </div>
-          </div>
-          <div className="feature-box text-center ">
-            <div className="feature-bg">
-              <div className="feature-header">
-                <div className="feature-icon">
-                  <img src={CategoryIcon4} alt="" />
-                </div>
-                <div className="feature-cont">
-                  <div className="feature-text">Python Development</div>
-                </div>
-              </div>
-              <p>30 Instructors</p>
-            </div>
-          </div>
+            )
+          })
+        }
         </OwlCarousel>
-      </div>
+      </div> 
     </section>
   );
 };

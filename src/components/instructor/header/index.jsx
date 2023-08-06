@@ -117,7 +117,7 @@ export function InstructorHeader({ activeMenu, instructorInfo }) {
                   onClick={profileClick}
                 >
                   <span className="user-img">
-                    <img src={"instructorInfo.instructorImageURL"} alt="" />
+                    <img src={instructorInfo.imageUrl} alt="" />
                     <span className="status online"></span>
                   </span>
                 </Link>
@@ -133,14 +133,13 @@ export function InstructorHeader({ activeMenu, instructorInfo }) {
                   <div className="user-header">
                     <div className="avatar avatar-sm">
                       <img
-                        src={"instructorInfo.instructorImage"}
+                        src={instructorInfo.imageUrl}
                         alt="User Image"
                         className="avatar-img rounded-circle"
                       />
                     </div>
                     <div className="user-text">
-                      {/* <h6>{instructorInfo.instructorFirstName + " " + instructorInfo.instructorLastName}</h6> */}
-                      <h6>{"instructorInfo.instructorFirstName + ' ' + instructorInfo.instructorLastName"}</h6>
+                      <h6>{instructorInfo.username}</h6>
                       <p className="text-muted text mb-0">Instructor</p>
                     </div>
                   </div>
