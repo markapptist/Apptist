@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import Footer from "../../footer";
 import {
   Course10,
@@ -20,6 +20,8 @@ import { getInstructor } from "../../../graphql/queries";
 export const Dashboard = () => {
 
   const [instructorInfo, setInstructorInfo] = useState(null);
+
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     fetchInstructorDashboardPageData();
@@ -316,23 +318,23 @@ export const Dashboard = () => {
                                   {
                                     instructorInfo.publishedCourses.items.map((course, index) => {
                                       return (
-                                        <tr key={index}>
+                                        <tr key={index} onClick={()=>{navigateTo("/course-details", {state:{courseId: course.id}})}}>
                                           <td>
                                             <div className="sell-table-group d-flex align-items-center">
                                               <div className="sell-group-img">
-                                                <Link to="course-details">
+                                                <div>
                                                   <img
                                                     src={course.imageUrl}
                                                     className="img-fluid "
                                                     alt=""
                                                   />
-                                                </Link>
+                                                </div>
                                               </div>
                                               <div className="sell-tabel-info">
                                                 <p>
-                                                  <Link to="course-details">
+                                                  <div>
                                                     {course.title}
-                                                  </Link>
+                                                  </div>
                                                 </p>
                                               </div>
                                             </div>

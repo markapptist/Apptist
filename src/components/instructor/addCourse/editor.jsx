@@ -25,4 +25,17 @@ const TextEditor = ({setCourseDescription}) => {
   );
 };
 
+export const TextEditorForLesson = ({sectionIndex, lessonIndex, setLessonDescription}) => {
+  return (
+    <CKEditor
+      editor={ClassicEditor}
+      onChange={(event, editor) => {
+        const data = editor.getData();
+        setLessonDescription(sectionIndex, lessonIndex, data);
+        console.log({ event, editor, data });
+      }}
+    />
+  );
+}
+
 export default TextEditor;

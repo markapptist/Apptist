@@ -7,7 +7,10 @@ import { Home } from "./components/home";
 import { Dashboard } from "./components/instructor/dashboard";
 import AddCourse from "./components/instructor/addCourse";
 import StudentEditProfile from "./components/student/editProfile";
+import CourseDetails from "./components/course/courseDetails";
+
 import config from 'config';
+import PaymentPage from "./components/course/checkout";
 const Approuter = () => {
   return (
     <BrowserRouter basename={`${config.publicPath}`}>
@@ -19,10 +22,13 @@ const Approuter = () => {
 
         {/* Instructor Components */}
         <Route path="/instructor-dashboard" element={<Dashboard />} />
+        <Route path="/course-details" element={<CourseDetails/>}/>
         <Route path="/add-course" element={<AddCourse/>}/>
 
         {/* Stundent Components */}
         <Route path="/student-edit-profile" element={<StudentEditProfile />} />
+
+        <Route path="/checkout" element={<PaymentPage/>}/>
       </Routes>
     </BrowserRouter>
   );

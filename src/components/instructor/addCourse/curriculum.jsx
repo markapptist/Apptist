@@ -1,7 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { TextEditorForLesson } from "./editor";
 import { Link } from "react-router-dom";
 
 const Curriculum = ({nextTab3, prevTab2, newCourseData, setNewCourseData, state}) => {
+
+  const videoUploadHandler = (event, sectionIndex, lessonIndex) => {
+    let file = event.target.files[0];
+
+    const updatedSection = [...sections];
+    if(sectionIndex>=0 && sectionIndex<updatedSection.length){
+      if(lessonIndex>=0 && lessonIndex<updatedSection[sectionIndex].length){
+        updatedSection[sectionIndex][lessonIndex]["video"] = file;
+        setSections(updatedSection);
+        console.log("Video Saved successfully!\n", "saved value:", sections[sectionIndex][lessonIndex].video);
+      }else{
+        console.log("Invalid Lesson Index");
+      }
+    }else{
+      console.log("Invalid Section Index");
+    }
+  }
+
+  const [editorToggler, setEditorToggler] = useState(false);
 
   const [totalSections, setTotalSections] = useState(2);
 
@@ -9,25 +29,92 @@ const Curriculum = ({nextTab3, prevTab2, newCourseData, setNewCourseData, state}
     [
       {
         title: "lesson title",
-        videoUrl: "video Url",
+        videoUrl: null,
+        video: null,
         description: "description"
       },{
         title: "lesson title",
-        videoUrl: "video Url",
+        videoUrl: null,
+        video: null,
         description: "description"
       }
     ],[
       {
         title: "lesson title",
-        videoUrl: "video Url",
+        videoUrl: null,
+        video: null,
         description: "description"
       },{
         title: "lesson title",
-        videoUrl: "video Url",
+        videoUrl: null,
+        video: null,
         description: "description"
       }
     ]
   ]);
+
+  const addSection = () => {
+    const updatedSection = [...sections, [
+      {
+        title: "lesson title",
+        videoUrl: null,
+        video: null,
+        description: "description"
+      }
+    ]]
+    setSections(updatedSection);
+  }
+
+  const addLecture = (sectionIndex) => {
+    console.log(sectionIndex);  
+    const updateSection = [...sections];
+    updateSection[sectionIndex].push({
+      title: "lesson title",
+      videoUrl: null,
+      video: null,
+      description: "description"
+    });
+    setSections(updateSection);
+  }
+
+  const setLessonDescription = (sectionIndex, lessonIndex, description) => {
+    const updatedSection = [...sections];
+    if(sectionIndex>=0 && sectionIndex<updatedSection.length){
+      if(lessonIndex>=0 && lessonIndex<updatedSection[sectionIndex].length){
+        updatedSection[sectionIndex][lessonIndex]["description"] = description;
+        setSections(updatedSection);
+      }else{
+        console.log("Invalid Lesson Index");
+      }
+    }else{
+      console.log("Invalid Section Index");
+    }
+  }
+
+  const onDeleteSection = (sectionIndex) => {
+    const updatedSection = [...sections];
+    if(sectionIndex>=0 && sectionIndex<updatedSection.length){
+      updatedSection.splice(sectionIndex, 1);
+      setTotalSections(totalSections ? totalSections-1 : 0);
+      setSections(updatedSection);
+    }else{
+      console.log("Invalid Section Index");
+    }
+  }
+
+  const onLessonDelete = (sectionIndex, lessonIndex) => {
+    const updatedSection = [...sections];
+    if(sectionIndex>=0 && sectionIndex<updatedSection.length){
+      if(lessonIndex>=0 && lessonIndex<updatedSection[sectionIndex].length){
+        updatedSection[sectionIndex].splice(lessonIndex, 1);
+        setSections(updatedSection);
+      }else{
+        console.log("Invalid Lesson Index");
+      }
+    }else{
+      console.log("Invalid Section Index");
+    }
+  }
 
   return (
     <>
@@ -37,7 +124,7 @@ const Curriculum = ({nextTab3, prevTab2, newCourseData, setNewCourseData, state}
             <h4>Curriculum</h4>
           </div>
           <div className="add-course-section">
-            <div to="#" className="btn" onClick={()=>{setTotalSections(totalSections+1);}}>
+            <div className="btn" onClick={()=>{addSection(); setTotalSections(totalSections+1);}}>
               Add Section
             </div>
           </div>
@@ -52,7 +139,10 @@ const Curriculum = ({nextTab3, prevTab2, newCourseData, setNewCourseData, state}
                           placeholder="Section Title"
                         />
                       </p>
-                      <div to="#" className="btn">
+                      <div className="btn" style={{borderColor:"red", color:"red"}} onClick={()=>{onDeleteSection(index)}}>
+                        Delete Section
+                      </div>
+                      <div to="#" className="btn" onClick={()=>{addLecture(index);}}>
                         Add Lecture
                       </div>
                     </div>
@@ -66,31 +156,64 @@ const Curriculum = ({nextTab3, prevTab2, newCourseData, setNewCourseData, state}
                                     <Link
                                       className="collapsed faq-collapse"
                                       data-bs-toggle="collapse"
-                                      to="#collapseOne"
+                                      to={"#collapse"+lessonIndex}
                                     >
-                                      <i className="fas fa-align-justify" /> Introduction
+                                      <i className="fas fa-circle-play"/><i style={{fontSize:"1rem"}}>Lesson {lessonIndex+1}:</i>
+                                      <input type="text" style={{border:"1px solid #aaaaaa", borderRadius:"5px"}}
+                                        placeholder="Title"
+                                      />
                                     </Link>
                                     <div className="faq-right">
-                                      <Link to="#">
-                                        <i className="far fa-pen-to-square me-1" />
-                                      </Link>
-                                      <Link to="#" className="me-0">
+                                      <div onClick={()=>{onLessonDelete(index, lessonIndex)}} className="me-0">
                                         <i className="far fa-trash-can" />
-                                      </Link>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
-                                    id="collapseOne"
+                                    id={"collapse"+lessonIndex}
                                     className="collapse"
                                     data-bs-parent="#accordion">
                                     <div className="faq-body">
                                       <div className="add-article-btns">
-                                        <Link to="#" className="btn">
-                                          Add Article
-                                        </Link>
-                                        <Link to="#" className="btn me-0">
-                                          Add Description
-                                        </Link>
+                                        <div className="btn" style={{paddingBottom:"2px"}}>
+                                          <label htmlFor={"videoInput"+lessonIndex}>Add Video</label>
+                                          <input type="file" 
+                                            id={"videoInput"+lessonIndex}
+                                            onChange={(event)=>{
+                                              console.log("upload video");
+                                              videoUploadHandler(event, index, lessonIndex);
+                                            }}
+                                            accept="video/*"
+                                            style={{display:"none"}}
+                                          />
+                                          {
+                                            sections[index][lessonIndex].video && (
+                                              <span style={{margin:"5px",padding: "5px", borderRadius: "5px" ,backgroundColor: "#1d9cfd", color: "white"}}>
+                                                <i>WinFile1.mp4</i>{"\u00A0"}
+                                                  <i className="fa fa-times" onClick={()=>{
+                                                    const updateSection = [...sections]
+                                                    updateSection[index][lessonIndex].video = null;
+                                                    setSections(updateSection);
+                                                  }}/>
+                                              </span>
+                                            )
+                                          }
+                                        </div>
+                                        <div className="btn" style={{paddingBottom:"2px"}}>
+                                          <label onClick={()=>{
+                                            console.log(editorToggler);
+                                            setEditorToggler(!editorToggler);
+                                            }}>Add Description</label>
+                                        </div>
+                                        {
+                                          editorToggler && (
+                                            <div className="editor">
+                                              <TextEditorForLesson setLessonDescription={setLessonDescription} sectionIndex={index}
+                                              lessonIndex={lessonIndex}
+                                              />
+                                            </div>
+                                          )
+                                        }
                                       </div>
                                     </div>
                                   </div>
@@ -100,395 +223,10 @@ const Curriculum = ({nextTab3, prevTab2, newCourseData, setNewCourseData, state}
                           }
                         </div>
                     </div>
-                    {/* <div className="curriculum-info">
-                      <div id="accordion"> 
-                        <div className="faq-grid">
-                          <div className="faq-header">
-                            <Link
-                              className="collapsed faq-collapse"
-                              data-bs-toggle="collapse"
-                              to="#collapseOne"
-                            >
-                              <i className="fas fa-align-justify" /> Introduction
-                            </Link>
-                            <div className="faq-right">
-                              <Link to="#">
-                                <i className="far fa-pen-to-square me-1" />
-                              </Link>
-                              <Link to="#" className="me-0">
-                                <i className="far fa-trash-can" />
-                              </Link>
-                            </div>
-                          </div>
-                          <div
-                            id="collapseOne"
-                            className="collapse"
-                            data-bs-parent="#accordion"
-                          >
-                            <div className="faq-body">
-                              <div className="add-article-btns">
-                                <Link to="#" className="btn">
-                                  Add Article
-                                </Link>
-                                <Link to="#" className="btn me-0">
-                                  Add Description
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="faq-grid">
-                          <div className="faq-header">
-                            <Link
-                              className="collapsed faq-collapse"
-                              data-bs-toggle="collapse"
-                              to="#collapseTwo"
-                            >
-                              <i className="fas fa-align-justify" /> Installing
-                              Development Software
-                            </Link>
-                            <div className="faq-right">
-                              <Link to="#">
-                                <i className="far fa-pen-to-square me-1" />
-                              </Link>
-                              <Link to="#" className="me-0">
-                                <i className="far fa-trash-can" />
-                              </Link>
-                            </div>
-                          </div>
-                          <div
-                            id="collapseTwo"
-                            className="collapse"
-                            data-bs-parent="#accordion"
-                          >
-                            <div className="faq-body">
-                              <div className="add-article-btns">
-                                <Link to="#" className="btn">
-                                  Add Article
-                                </Link>
-                                <Link to="#" className="btn me-0">
-                                  Add Description
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="faq-grid mb-0">
-                          <div className="faq-header">
-                            <Link
-                              className="collapsed faq-collapse"
-                              data-bs-toggle="collapse"
-                              to="#collapseThree"
-                            >
-                              <i className="fas fa-align-justify" /> Hello World
-                              Project from GitHub
-                            </Link>
-                            <div className="faq-right">
-                              <Link to="#">
-                                <i className="far fa-pen-to-square me-1" />
-                              </Link>
-                              <Link to="#" className="me-0">
-                                <i className="far fa-trash-can" />
-                              </Link>
-                            </div>
-                          </div>
-                          <div
-                            id="collapseThree"
-                            className="collapse"
-                            data-bs-parent="#accordion"
-                          >
-                            <div className="faq-body">
-                              <div className="add-article-btns">
-                                <Link to="#" className="btn">
-                                  Add Article
-                                </Link>
-                                <Link to="#" className="btn me-0">
-                                  Add Description
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        </div> 
-                      </div>
-                    </div> */}
                   </div>
                 );
               })
             }
-            {/* <div className="curriculum-grid">
-              <div className="curriculum-head">
-                <p>Section 1: Introduction</p>
-                <Link to="#" className="btn">
-                  Add Lecture
-                </Link>
-              </div>
-              <div className="curriculum-info">
-                <div id="accordion">
-                  <div className="faq-grid">
-                    <div className="faq-header">
-                      <Link
-                        className="collapsed faq-collapse"
-                        data-bs-toggle="collapse"
-                        to="#collapseOne"
-                      >
-                        <i className="fas fa-align-justify" /> Introduction
-                      </Link>
-                      <div className="faq-right">
-                        <Link to="#">
-                          <i className="far fa-pen-to-square me-1" />
-                        </Link>
-                        <Link to="#" className="me-0">
-                          <i className="far fa-trash-can" />
-                        </Link>
-                      </div>
-                    </div>
-                    <div
-                      id="collapseOne"
-                      className="collapse"
-                      data-bs-parent="#accordion"
-                    >
-                      <div className="faq-body">
-                        <div className="add-article-btns">
-                          <Link to="#" className="btn">
-                            Add Article
-                          </Link>
-                          <Link to="#" className="btn me-0">
-                            Add Description
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="faq-grid">
-                    <div className="faq-header">
-                      <Link
-                        className="collapsed faq-collapse"
-                        data-bs-toggle="collapse"
-                        to="#collapseTwo"
-                      >
-                        <i className="fas fa-align-justify" /> Installing
-                        Development Software
-                      </Link>
-                      <div className="faq-right">
-                        <Link to="#">
-                          <i className="far fa-pen-to-square me-1" />
-                        </Link>
-                        <Link to="#" className="me-0">
-                          <i className="far fa-trash-can" />
-                        </Link>
-                      </div>
-                    </div>
-                    <div
-                      id="collapseTwo"
-                      className="collapse"
-                      data-bs-parent="#accordion"
-                    >
-                      <div className="faq-body">
-                        <div className="add-article-btns">
-                          <Link to="#" className="btn">
-                            Add Article
-                          </Link>
-                          <Link to="#" className="btn me-0">
-                            Add Description
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="faq-grid mb-0">
-                    <div className="faq-header">
-                      <Link
-                        className="collapsed faq-collapse"
-                        data-bs-toggle="collapse"
-                        to="#collapseThree"
-                      >
-                        <i className="fas fa-align-justify" /> Hello World
-                        Project from GitHub
-                      </Link>
-                      <div className="faq-right">
-                        <Link to="#">
-                          <i className="far fa-pen-to-square me-1" />
-                        </Link>
-                        <Link to="#" className="me-0">
-                          <i className="far fa-trash-can" />
-                        </Link>
-                      </div>
-                    </div>
-                    <div
-                      id="collapseThree"
-                      className="collapse"
-                      data-bs-parent="#accordion"
-                    >
-                      <div className="faq-body">
-                        <div className="add-article-btns">
-                          <Link to="#" className="btn">
-                            Add Article
-                          </Link>
-                          <Link to="#" className="btn me-0">
-                            Add Description
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="curriculum-grid">
-              <div className="curriculum-head">
-                <p>Section 1: JavaScript Beginnings</p>
-                <Link to="#" className="btn">
-                  Add Lecture
-                </Link>
-              </div>
-              <div className="curriculum-info">
-                <div id="accordion-one">
-                  <div className="faq-grid">
-                    <div className="faq-header">
-                      <Link
-                        className="collapsed faq-collapse"
-                        data-bs-toggle="collapse"
-                        to="#collapseFour"
-                      >
-                        <i className="fas fa-align-justify" /> Introduction
-                      </Link>
-                      <div className="faq-right">
-                        <Link to="#">
-                          <i className="far fa-pen-to-square me-1" />
-                        </Link>
-                        <Link to="#" className="me-0">
-                          <i className="far fa-trash-can" />
-                        </Link>
-                      </div>
-                    </div>
-                    <div
-                      id="collapseFour"
-                      className="collapse"
-                      data-bs-parent="#accordion-one"
-                    >
-                      <div className="faq-body">
-                        <div className="add-article-btns">
-                          <Link to="#" className="btn">
-                            Add Article
-                          </Link>
-                          <Link to="#" className="btn me-0">
-                            Add Description
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="faq-grid">
-                    <div className="faq-header">
-                      <Link
-                        className="collapsed faq-collapse"
-                        data-bs-toggle="collapse"
-                        to="#collapseFive"
-                      >
-                        <i className="fas fa-align-justify" /> Installing
-                        Development Software
-                      </Link>
-                      <div className="faq-right">
-                        <Link to="#">
-                          <i className="far fa-pen-to-square me-1" />
-                        </Link>
-                        <Link to="#" className="me-0">
-                          <i className="far fa-trash-can" />
-                        </Link>
-                      </div>
-                    </div>
-                    <div
-                      id="collapseFive"
-                      className="collapse"
-                      data-bs-parent="#accordion-one"
-                    >
-                      <div className="faq-body">
-                        <div className="add-article-btns">
-                          <Link to="#" className="btn">
-                            Add Article
-                          </Link>
-                          <Link to="#" className="btn me-0">
-                            Add Description
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="faq-grid">
-                    <div className="faq-header">
-                      <Link
-                        className="collapsed faq-collapse"
-                        data-bs-toggle="collapse"
-                        to="#collapseSix"
-                      >
-                        <i className="fas fa-align-justify" /> Hello World
-                        Project from GitHub
-                      </Link>
-                      <div className="faq-right">
-                        <Link to="#">
-                          <i className="far fa-pen-to-square me-1" />
-                        </Link>
-                        <Link to="#" className="me-0">
-                          <i className="far fa-trash-can" />
-                        </Link>
-                      </div>
-                    </div>
-                    <div
-                      id="collapseSix"
-                      className="collapse"
-                      data-bs-parent="#accordion-one"
-                    >
-                      <div className="faq-body">
-                        <div className="add-article-btns">
-                          <Link to="#" className="btn">
-                            Add Article
-                          </Link>
-                          <Link to="#" className="btn me-0">
-                            Add Description
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="faq-grid mb-0">
-                    <div className="faq-header">
-                      <Link
-                        className="collapsed faq-collapse"
-                        data-bs-toggle="collapse"
-                        to="#collapseSeven"
-                      >
-                        <i className="fas fa-align-justify" /> Our Sample
-                        Website
-                      </Link>
-                      <div className="faq-right">
-                        <Link to="#">
-                          <i className="far fa-pen-to-square me-1" />
-                        </Link>
-                        <Link to="#" className="me-0">
-                          <i className="far fa-trash-can" />
-                        </Link>
-                      </div>
-                    </div>
-                    <div
-                      id="collapseSeven"
-                      className="collapse"
-                      data-bs-parent="#accordion-one"
-                    >
-                      <div className="faq-body">
-                        <div className="add-article-btns">
-                          <Link to="#" className="btn">
-                            Add Article
-                          </Link>
-                          <Link to="#" className="btn me-0">
-                            Add Description
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
           <div className="widget-btn">
             <Link className="btn btn-black prev_btn" onClick={prevTab2} state={state}>Previous</Link>

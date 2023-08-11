@@ -55,12 +55,10 @@ const CourseMedia = ({prevTab1, nextTab2, newCourseData, setNewCourseData, setCo
                 {imageUploaded && imageInputRef.current.value &&
                   (<span style={{padding: "10px", borderRadius: "5px" ,backgroundColor: "#1d9cfd", color: "white"}}>
                     <i>{imageUploaded}</i>{"\u00A0"}
-                    {/* <button style={{border:"none", background: "none"}}> */}
                       <i className="fa fa-times" onClick={()=>{
                         setImageUploaded(null);
                         imageInputRef.current.value = null;
-                        }}></i>
-                    {/* </button> */}
+                        }} />
                   </span>)
                 }
               </div>
