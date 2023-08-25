@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Home, LogOut, Moon, Star } from "react-feather";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
+import { Auth } from "aws-amplify";
 import {
   logo,
   ProfileAvatar,
@@ -9,6 +10,9 @@ import {
 } from "../../imagepath";
 
 export function InstructorHeader({ activeMenu, instructorInfo }) {
+
+  const navigateTo = useNavigate();
+
   const [navbar, setNavbar] = useState(false);
 
   const [showCart, setShowCart] = useState(false);
@@ -62,6 +66,33 @@ export function InstructorHeader({ activeMenu, instructorInfo }) {
     }
   };
 
+  const redirectToHome = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser(); 
+      if(!user)
+        navigateTo('/');
+      else if(user.attributes['custom:role']=='1')
+        navigateTo('/instructor-dashboard');
+      else
+        navigateTo('/student-edit-profile');
+    } catch (error) {
+      console.log("Error: ", error.message);
+    }
+  }
+
+  const SignOut = async () => {
+    const confirm = window.confirm("Are you sure you want to log out?");
+    try {
+      if(confirm){
+        await Auth.signOut();
+        console.log("signing out");
+        navigateTo("/");
+      }
+    } catch (error) {
+      console.log('error signing out: ', error.message) 
+    }
+  }
+
   window.addEventListener("scroll", changeHeaderBackground);
 
   return (
@@ -87,15 +118,18 @@ export function InstructorHeader({ activeMenu, instructorInfo }) {
                   <span></span>
                 </span>
               </Link>
-              <Link to="/" className="navbar-brand logo">
+              <div onClick={redirectToHome} className="navbar-brand logo">
                 <img src={logo} className="img-fluid" alt="Logo" />
-              </Link>
+              </div>
             </div>
             <div className="main-menu-wrapper">
               <div className="menu-header">
-                <Link to="/" className="menu-logo">
+                {/* <Link to="/" className="menu-logo">
                   <img src={logo} className="img-fluid" alt="Logo" />
-                </Link>
+                </Link> */}
+                <div onClick={redirectToHome} className="navbar-brand logo">
+                  <img src={logo} className="img-fluid" alt="Logo" />
+                </div>
                 <Link
                   id="menu_close"
                   className="menu-close"
@@ -117,7 +151,7 @@ export function InstructorHeader({ activeMenu, instructorInfo }) {
                   onClick={profileClick}
                 >
                   <span className="user-img">
-                    <img src={"instructorInfo.instructorImageURL"} alt="" />
+                    <img src={instructorInfo.imageUrl} alt="" />
                     <span className="status online"></span>
                   </span>
                 </Link>
@@ -133,14 +167,13 @@ export function InstructorHeader({ activeMenu, instructorInfo }) {
                   <div className="user-header">
                     <div className="avatar avatar-sm">
                       <img
-                        src={"instructorInfo.instructorImage"}
+                        src={instructorInfo.imageUrl}
                         alt="User Image"
                         className="avatar-img rounded-circle"
                       />
                     </div>
                     <div className="user-text">
-                      {/* <h6>{instructorInfo.instructorFirstName + " " + instructorInfo.instructorLastName}</h6> */}
-                      <h6>{"instructorInfo.instructorFirstName + ' ' + instructorInfo.instructorLastName"}</h6>
+                      <h6>{instructorInfo.username}</h6>
                       <p className="text-muted text mb-0">Instructor</p>
                     </div>
                   </div>
@@ -148,7 +181,7 @@ export function InstructorHeader({ activeMenu, instructorInfo }) {
                     className="dropdown-item text"
                     to="/instructor-dashboard"
                   >
-                    <Home size={14} color={"#FF875A"} className="headerIcon" />{" "}
+                    <Home size={14} color={"#FF875A"} onClick={redirectToHome} className="headerIcon" />{" "}
                     Dashboard
                   </Link>
                   <Link
@@ -158,14 +191,15 @@ export function InstructorHeader({ activeMenu, instructorInfo }) {
                     <Star size={14} color={"#FF875A"} className="headerIcon" />{" "}
                     Edit Profile
                   </Link>
-                  <Link className="dropdown-item text" to="/">
+                  <div className="dropdown-item text" to="/">
                     <LogOut
                       size={14}
                       color={"#FF875A"}
                       className="headerIcon"
+                      onClick={()=>{SignOut}}
                     />{" "}
                     Logout
-                  </Link>
+                  </div>
                 </div>
               </li>
             </ul>

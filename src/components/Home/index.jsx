@@ -23,8 +23,8 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { useSpring, animated } from "react-spring";
 
-import { API } from "aws-amplify";
-import { HomePageAPI } from "../../api/NonRegisteredUsersAPIs";
+import { API, graphqlOperation } from "aws-amplify";
+import { listCourses } from "./queries";
 
 const options = [
   { label: "Category", value: "Category" },
@@ -45,8 +45,9 @@ export const Home = () => {
 
   const fetchData = async () => {
     try {
-      // const data = await API.get(HomePageAPI.apiName, HomePageAPI.path);
-      const data = {}
+      const response = await API.graphql(graphqlOperation(listCourses));
+      const data = response.data.listCourses.items; 
+      console.log("data:", data, "length:", data.length);
       setPageInfo(data);
     } catch (error) {
       console.log(error.response);
@@ -167,12 +168,12 @@ export const Home = () => {
                         <div className="rate-head">
                           <h2>
                           <span className="d-flex"> 
-                              {/* <Number n={pageInfo.totalPlatformReviews} />+ */}
+                              <Number n={1000} />+
                           </span>
                           </h2>
                         </div>
                         <div className="rating d-flex align-items-center">
-                          {/* <h2 className="d-inline-block average-rating">{pageInfo.platformRating}</h2> */}
+                          <h2 className="d-inline-block average-rating">{4.8}</h2>
                           <i className="fas fa-star filled" />
                           <i className="fas fa-star filled" />
                           <i className="fas fa-star filled" />
@@ -209,7 +210,7 @@ export const Home = () => {
                             <h4>
                               {/* <span>10</span>K */}
                               <span className="d-flex"> 
-                              {/* <Number n={pageInfo.totalCoursesOnPlatform} /> */}
+                              <Number n={3000} />
                           </span>
                             </h4>
                             <p>Online Courses</p>
@@ -231,7 +232,7 @@ export const Home = () => {
                           <div className="course-inner-content">
                             <h4>
                             <span className="d-flex"> 
-                              {/* <Number n={pageInfo.totalTutorsOnPlatform} /> */}
+                              <Number n={200} />+
                           </span>
                             </h4>
                             <p>Expert Tutors</p>
@@ -253,7 +254,7 @@ export const Home = () => {
                           <div className="course-inner-content">
                             <h4>
                             <span className="d-flex"> 
-                              {/* <Number n={pageInfo.totalStudentEnrolled} /> */}
+                              <Number n={150} />+
                           </span>
                             </h4>
                             <p>Ceritified Courses</p>
@@ -275,7 +276,7 @@ export const Home = () => {
                           <div className="course-inner-content">
                             <h4>
                             <span className="d-flex"> 
-                              {/* <Number n={pageInfo.totalSuccessStories} /> */}
+                              <Number n={300} />+
                           </span>
                             </h4>
                             <p>Online Students</p>
@@ -288,7 +289,7 @@ export const Home = () => {
               </div>
             </div>
           </section>
-          {/* <TopCategory courseList={pageInfo.courseList} /> */}
+          <TopCategory courseList={pageInfo} />
           <section className="section master-skill">
             <div className="container">
               <div className="row">

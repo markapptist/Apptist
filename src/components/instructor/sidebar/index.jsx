@@ -44,22 +44,27 @@ export default function InstructorSidebar({ activeMenu, instructorInfo }) {
           <div className="settings-menu p-0">
             <div className="profile-bg">
               <h5>Beginner</h5>
-              <img src={InstructorProfileBg} alt="" />
+              <img src="https://images.freecreatives.com/wp-content/uploads/2016/03/Cute-Purple-Background.jpg" alt="" />
               <div className="profile-img">
                 <Link to="#">
-                  <img src={"instructorInfo.instructorImageURL"} alt="" />
+                  <img src={instructorInfo.imageUrl} alt="" />
                 </Link>
               </div>
             </div>
             <div className="profile-group">
               <div className="profile-name text-center">
                 <h4>
-                  <Link to="#">{'instructorInfo.instructorFirstName+" "+instructorInfo.instructorLastName'}</Link>
+                  <Link to="#">{instructorInfo.username}</Link>
                 </h4>
                 <p>Instructor</p>
               </div>
               <div className="go-dashboard text-center">
-                <Link to="#" className="btn btn-primary">
+                <Link to="/add-course"
+                  state={{
+                    imageUrl: instructorInfo.imageUrl,
+                    username: instructorInfo.username
+                  }}
+                  className="btn btn-primary">
                   Create New Course
                 </Link>
               </div>
