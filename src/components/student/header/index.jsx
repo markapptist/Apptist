@@ -109,7 +109,7 @@ export default function StudentHeader({ activeMenu, studentInfo }) {
                   onClick={profileClick}
                 >
                   <span className="user-img">
-                    <img src={studentInfo.studentImage} alt="" />
+                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg" alt="" />
                     <span className="status online"></span>
                   </span>
                 </Link>
@@ -125,14 +125,14 @@ export default function StudentHeader({ activeMenu, studentInfo }) {
                   <div className="user-header">
                     <div className="avatar avatar-sm">
                       <img
-                        src={studentInfo.studentImage}
+                        src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"
                         alt="User Image"
                         className="avatar-img rounded-circle"
                       />
                     </div>
                     <div className="user-text">
-                      <h6>{studentInfo.studentFirstName+" "+studentInfo.studentLastName}</h6>
-                      <p className="text-muted text mb-0">{studentInfo.studentLevel}</p>
+                      <h6>Nisargkumar Mahyavanshi</h6>
+                      {/* <p className="text-muted text mb-0">{studentInfo.studentLevel}</p> */}
                     </div>
                   </div>
                   <Link

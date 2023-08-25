@@ -8,6 +8,7 @@ import { Dashboard } from "./components/instructor/dashboard";
 import AddCourse from "./components/instructor/addCourse";
 import StudentEditProfile from "./components/student/editProfile";
 import CourseDetails from "./components/course/courseDetails";
+import StudentDashboard from "./components/student/depositDashboard";
 
 import config from 'config';
 import PaymentPage from "./components/course/checkout";
@@ -26,6 +27,7 @@ const Approuter = () => {
         <Route path="/add-course" element={<AddCourse/>}/>
 
         {/* Stundent Components */}
+        <Route path="/student-dashboard" element={<StudentDashboard/>}/>
         <Route path="/student-edit-profile" element={<StudentEditProfile />} />
 
         <Route path="/checkout" element={<PaymentPage/>}/>

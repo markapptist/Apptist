@@ -35,11 +35,11 @@ export default function StudentSideBar({ activeMenu, studentInfo }) {
           <div className="profile-bg">
             {/* <h5>{studentInfo.studentLevel}</h5> */}
             <h5>Begineer</h5>
-            <img src={ProfileBg} alt="" />
+            <img src="https://static.vecteezy.com/system/resources/previews/003/031/764/original/blue-wide-background-with-linear-blurred-gradient-free-vector.jpg" alt="" />
             <div className="profile-img">
               <Link to="#">
                 {/* <img src={studentInfo.studentImage} alt="" /> */}
-                <img src={""} alt="" />
+                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg" alt="" />
               </Link>
             </div>
           </div>

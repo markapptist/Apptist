@@ -103,7 +103,7 @@ export default function StudentEditProfile() {
                         <div className="course-group-img d-flex align-items-center">
                           <Link to="student-profile">
                             {/* <img src={studentInfo.studentImage} alt="" className="img-fluid" /> */}
-                            <img src={""} alt="" className="img-fluid" />
+                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg" alt="" className="img-fluid" />
                           </Link>
                           <div className="course-name">
                             <h4>

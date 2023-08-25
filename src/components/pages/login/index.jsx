@@ -29,7 +29,7 @@ const Login = () => {
       console.log("Authenticating...")
       const user = await Auth.signIn(email, password);
       if(user){
-        const path = user.attributes["custom:role"]=="1" ? "/instructor-dashboard" : "/student-edit-profile"
+        const path = user.attributes["custom:role"]=="1" ? "/instructor-dashboard" : "/student-dashboard"
         navigateTo(path);
       }
       else

@@ -16,7 +16,7 @@ const AddCourse = () => {
   const [TabChange1, setTabChange1] = useState(false);
   const [TabChange2, setTabChange2] = useState(false);
   const [TabChange3, setTabChange3] = useState(false);
-  const [PageChange, setPageChange] = useState("curriculum");
+  const [PageChange, setPageChange] = useState("basic");
 
   const {state} = useLocation();
 
